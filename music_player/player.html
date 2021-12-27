@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/player.css">
+    <title>播放器</title>
+</head>
+
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <div id="wrap">
+        <div class="play_wrap" id="player" style="position: relative">
+            <div class="left">
+                <div class="me">
+                    <div><img src="/image/lisa.jpg" style="position:relative;border-radius: 50%;width: 65px;margin: 20px 10px 10px 20px;clear: both;" /></div>
+                    <div class="username"><b>Merry Christmas</b></div>
+                    <div class="intro_me"><p>暂无简介</p></div>
+                </div>
+                <div class="list_song">
+                    <div class="list_music">
+                        <ul style="list-style: none;">
+                            <li v-for="item in song_list">
+                                <a href="javascript:;" @click="play_music(item.id,item.album.id,item.artists[0].name,item.name)" ></a>
+                                <p style="margin-left: 10px;">{{item.name}} - {{item.artists[0].name}}
+                                <span>
+                                    <i v-if="item.mvid!=0" @click="play_mv(item.mvid,item.id,item.artists[0].name,item.name)"></i>
+                                </span>
+                                </p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>               
+            </div>
+
+            <div class="middle">
+                <div class="video_con" v-show="isShow"  style="display: none;" >
+                    <!-- <div @click="hide" ></div>  -->
+                    <!-- class="mask" -->
+                    <video :src="mvUrl" controls="controls" autoplay id="myVideo"></video>                  
+                </div>
+                <div v-show="audio_isPlaying">
+                    <div class="audio_on"><audio ref='audio' @play="play" @pause="pause" :src="musicurl" controls loop autoplay class="myaudio" style="margin-left: 50px;" id="myaudio"></audio></div>
+                    <div class="info_fengmian" :class="{playing:isPlaying}">
+                        <img src="/image/player_bar.png" class="play_bar" />
+                        <!-- 黑胶碟片 -->
+                        <img src="/image/disc.png" class="disc autoRotate" />
+                        <img :src="musiicfmurl==''?'/image/cover.png':musiicfmurl" class="cover autoRotate" />
+                    </div>                      
+                </div>
+                <div><p style="margin-left: 10px;" v-show="com_now">正在播放:{{now_song}} - {{now_singer}}</p></div>  
+            </div>
+            
+          
+            <div class="right">
+                <div class="search_wraps">
+                    <input type="text"  class="search_text" v-model="name" @keyup.enter="find" placeholder="请输入歌名或者歌手名">
+                    <button  v-model="name" @click="clear" v-if="name!=0" style="margin-left: -30px;border: 0;background-color: #fff;">x</button>
+                    <img src="/image/search.png" @click="find" style="float: right;margin-right: 5px;margin-top: 5px;"/>
+                </div>
+                <p class="title_" v-show="com_now">热门回复</p>
+                <div class="comments">
+                    <ul style="list-style: none;">
+                        <li v-for="item in CommentList">
+                            <img :src="item.user.avatarUrl" class="comment_pic"/>
+                            <b>{{item.user.nickname}}</b>
+                            <span>{{item.timeStr}}</span>
+                            <p>{{item.content}}</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script src="/player.js"></script>
+</html>

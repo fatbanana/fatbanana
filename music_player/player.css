@@ -1,0 +1,255 @@
+.play_wrap{
+    display: flex;
+    width: 1500px;
+    height: 800px;
+    background-color: rgb(54, 94, 80);
+    margin: 80px auto;
+}
+
+.left{
+    flex: 3;
+
+}
+
+.middle{
+    flex: 7;
+    background-color: rgba(241, 240, 240, 0.5);
+}
+
+.right{
+    flex: 3;
+}
+.search_wraps{
+    width: 300px;
+    height: 35px;  
+    margin: 20px 20px;
+    float: right;
+    background-color: rgba(36, 131, 99, 0.795);
+    clear: both;
+}
+
+.search_text{
+    width: 260px;
+    height: 33px;
+    line-height: 30px;
+    text-align: center;
+    margin: 0;   
+    border: 0;
+    background-color: #fff;
+}
+
+.myaudio{
+    width: 700px;
+    border-radius: 0;
+    bottom: 20px;
+    position: absolute;
+}
+
+.username{
+    color: rgb(245, 240, 240);
+    margin: -70px 10px 10px 100px;
+}
+
+.intro_me{
+    color: rgb(235, 223, 223);
+    margin: -5px 10px 10px 100px;
+}
+
+.list_song{
+    display: flex;
+    width: 300px;
+    height: 85%;
+    color: #fff;
+    vertical-align: middle;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.list_song::-webkit-scrollbar {
+    display: none;
+}
+
+.list_music{
+    width: 100%;
+    height: 30px;
+    color: #fff;
+    vertical-align: middle;
+}
+
+.list_music li:nth-child(odd) {
+    background-color: rgba(230, 228, 228, 0.322);
+  }
+
+
+.list_music li a {
+    display: block;
+    width: 17px;
+    height: 17px;
+    background-image: url("/image/start.png");
+    background-size: 100%;
+    margin-left: 5px;
+    margin-top: 2px;
+    margin-right: 5px;
+    box-sizing: border-box;
+    float: left;
+}
+
+.list_music li p {
+    font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.list_music li span i {
+    display: inline;
+    width: 20px;
+    height: 20px;
+    background-image: url("/image/video_start.png");
+    background-size: 100%;
+    margin-right: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+    float: right;
+}
+
+.comments{
+    display: flex;
+    width: 300px;
+    height: 85%;
+    color: #fff;
+    vertical-align: middle;
+    overflow-y: auto;
+    overflow-x: hidden;
+   
+}
+
+.title_{
+    color: #fff;
+    margin-left: 30px;
+    clear: both;
+}
+
+.comment_pic{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display:block;
+    /* 把图片变成块 */
+}
+
+.comments li b{
+    font-size: 13px;
+    font-weight: normal;
+    margin-top: -40px;
+    margin-left: 50px;
+    float: left;
+}
+
+.comments li span{
+    font-size: 10px;
+    font-weight: normal;
+    margin-top: -15px;
+    margin-left: 50px;
+    float: left;
+}
+
+.comments li p{
+    font-size: 13px;
+    
+    color: rgb(235, 223, 223);
+}
+
+.comments li {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.767);
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.comments::-webkit-scrollbar {
+    display: none;
+}
+
+.info_fengmian{
+    width: 700px;
+    height: 700px;
+    position: absolute;
+    margin-left: 85px;
+    top: 0px;
+}
+
+.disc {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    left: 73px;
+    top: 100px;
+    z-index: 9;
+}
+.cover {
+    position: absolute;
+    width: 330px;
+    height: 330px;
+    left: 150px;
+    top: 210px;
+    border-radius: 75px;
+    z-index: 8;
+}
+
+/* 旋转的动画 */
+@keyframes Rotate {
+    from {
+      transform: rotateZ(0);
+    }
+    to {
+      transform: rotateZ(360deg);
+    }
+  }
+  /* 旋转的类名 */
+  .autoRotate {
+    animation-name: Rotate;
+    animation-iteration-count: infinite;
+    animation-play-state: paused;
+    animation-timing-function: linear;
+    animation-duration: 5s;
+  }
+  /* 是否正在播放 */
+  .info_fengmian.playing .disc,
+  .info_fengmian.playing .cover {
+    animation-play-state: running;
+  }
+  
+  .play_bar {
+    position: absolute;
+    left: 300px;
+    top: -15px;
+    width: 130px;
+    z-index: 10;
+    transform: rotate(-25deg);
+    transform-origin: 12px 12px;
+    transition: 1s;
+  }
+  /* 播放杆 转回去 */
+  .info_fengmian.playing .play_bar {
+    transform: rotate(0);
+  }
+
+  .video_con video {
+    position: fixed;
+    width: 800px;
+    height: 546px;
+    left: 50%;
+    top: 50%;
+    margin-top: -273px;
+    transform: translateX(-50%);
+    /* z-index: 990; */
+  }
+  .video_con .mask {
+    position: fixed;
+    width: 800px;
+    height: 700px;
+    /* left: 0;
+    top: 0; */
+    z-index: 980;
+    background-color: rgba(0, 0, 0, 0.8);
+  }
